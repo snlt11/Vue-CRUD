@@ -17,7 +17,7 @@
       </div>
     </div>
     <p v-if="showDetail">{{ project.detail }}</p>
-    {{ project.complete }}
+    <!-- {{ project.complete }} -->
   </div>
 </template>
 

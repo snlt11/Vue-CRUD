@@ -1,11 +1,11 @@
 <template>
   <h1>Edit Project</h1>
-  <form @submit.prevent="addProject">
+  <form @submit.prevent>
     <label>Project Title</label>
     <input type="text" v-model="title" />
     <label>Project Details</label>
     <input type="text" v-model="detail" />
-    <button>Edit</button>
+    <button @click="updateProject">Update Project</button>
   </form>
 </template>
 
@@ -31,8 +31,28 @@ export default {
         console.log(error);
       });
   },
+  methods: {
+    updateProject() {
+      fetch("http://localhost:3000/projects/" + this.id, {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: this.title,
+          detail: this.detail,
+        }),
+      })
+        .then((response) => {
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          return error.message;
+        });
+    },
+  },
 };
 </script>
 
 <style></style>
-
